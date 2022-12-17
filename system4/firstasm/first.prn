@@ -1,0 +1,83 @@
+AARCH64 GAS  /tmp/ccH1m8h6.s 			page 1
+
+
+   1              	# 1 "first.S"
+   1              	// 
+   1              	...
+   0              	
+   0              	
+   1              	/* Copyright (C) 1991-2012 Free Software Foundation, Inc.
+   2              	// My first assembly language program
+   3              	// Name: Sid Bhattacharya
+   4              	//
+   5              	.text
+   6              	.global first
+   7              	.global second
+   8              	.global min
+   9              	.global bit_counter
+  10              	first:
+  11 0000 E10300AA 	  mov x1, x0
+  12 0004 0000018B 	  add x0, x0 ,x1
+  13 0008 0000018B 	  add x0, x0, x1
+  14 000c C0035FD6 	  ret
+  15              	second:
+  16 0010 0000018B 	  add x0, x0, x1
+  17 0014 C0035FD6 	  ret
+  18              	min:
+  19 0018 020001EB 	  subs x2, x0, x1
+  20 001c 6A000054 	  bge b_is_minimum //if a>=b
+  21              	  // In this case a is the min
+  22 0020 03000014 	  b after_block
+  23 0024 C0035FD6 	  ret
+  24              	
+  25              	b_is_minimum:
+  26              	  // In this case b is the min
+  27 0028 E00301AA 	  mov x0, x1
+  28              	
+  29              	after_block:
+  30 002c C0035FD6 	  ret
+  31              	
+  32              	bit_counter:
+  33 0030 010080D2 	  mov x1, #0        //cnt = 0
+  34              	
+  35              	  //for loop initialization
+  36 0034 020080D2 	  mov x2, #0        // i = 0
+  37              	
+  38              	forloop:
+  39              	  //for loop test: i!=64
+  40 0038 430001F1 	  subs x3, x2, #64  // x3 = i - 64
+  41 003c E0000054 	  beq loopend       // if i - 64 == 0 (i==64)
+  42              	  
+  43 0040 030040F2 	  ands x3, x0, #1   // x0 & 1
+  44 0044 80000054 	  beq after_inc
+  45              	
+  46 0048 21040091 	  add x1, x1, #1    //cnt++
+  47              	
+  48              	
+  49              	  //increment / i++
+  50 004c 42040091 	  add x2, x2, #1
+  51 0050 FAFFFF17 	  b forloop
+  52              	after_inc:
+AARCH64 GAS  /tmp/ccH1m8h6.s 			page 2
+
+
+  53 0054 00FC41D3 	  lsr x0, x0, #1    // value >>=1
+  54              	loopend:
+  55 0058 E00301AA 	  mov x0, x1
+  56 005c C0035FD6 	  ret
+AARCH64 GAS  /tmp/ccH1m8h6.s 			page 3
+
+
+DEFINED SYMBOLS
+             first.S:10     .text:0000000000000000 first
+             first.S:15     .text:0000000000000010 second
+             first.S:18     .text:0000000000000018 min
+             first.S:32     .text:0000000000000030 bit_counter
+             first.S:11     .text:0000000000000000 $x
+             first.S:25     .text:0000000000000028 b_is_minimum
+             first.S:29     .text:000000000000002c after_block
+             first.S:38     .text:0000000000000038 forloop
+             first.S:54     .text:0000000000000058 loopend
+             first.S:52     .text:0000000000000054 after_inc
+
+NO UNDEFINED SYMBOLS
